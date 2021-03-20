@@ -27,16 +27,7 @@ def magic(l, r):
 
 # Aufgabe 1
 def python():
-    output = ''
-    for i in range(4):
-        if i == 0:
-            output = '+--------+\n'
-        elif i == 1:
-            output += '  Python  \n'
-        elif i == 2:
-            output += '+--------+\n'
-        else:
-            return output
+    return '+--------+\n'' + Python + \n''+--------+\n'
 
 
 # Aufgabe 2
@@ -47,14 +38,11 @@ def hello():
 
 # Aufgabe 3
 def calculate(a, b, c):
-    sum = a + b
-    product = sum * c
-    print(f'Ergebnis = {product}')
+    return (a+b) * c
 
 
-def _arctan():
-    number = float(input('Bitte eine Zahl angeben!'))
-    print(f'arctan({number}) = {arctan(number)}')
+def kot_arctan(number):
+    return arctan(number)
 
 
 def days_parsed(a, b):
@@ -103,31 +91,27 @@ def format_seconds():
     print(f'{hours}:{minutes}:{seconds}')
 
 
-def mitternachtsformel():
+def mitternachtsformel(a, b, c):
     try:
-        a, b, c = input('Parameter eingebenen: <a b c> \n').split(' ')
         a, b, c = int(a), int(b), int(c)
     except ValueError:
-        print('Ungültige Eingabe!')
-        return
+        return 'beliebige Loesung'
     if a == 0:
         try:
             x = -c / b
-            print(f'Die Lösung ist {x}')
-            return
+            return x
         except ZeroDivisionError:
-            print('Ungültige Eingabe!')
-            return
+            return 'keine Loesung'
 
     det = b ** 2 - 4 * a * c
 
     if det == 0:
         x = -b / (2 * a)
-        print(f'Die doppelte Nullstelle ist bei {x}')
+        return x
     elif det:
         x1 = (-b + cmath.sqrt(det)) / (2 * a)
         x2 = (-b - cmath.sqrt(det)) / (2 * a)
-        print(f'Die Lösungen sind {x1} und {x2}!')
+        return x1, x2
 
 
 def convert_str():
@@ -194,17 +178,17 @@ def check_c_code():
         print(f'Programm {file_name} hat keine Klammer-Fehler!')
 
 
-t_c = [-17.2, 12.4, -2.5, 1.7, -5.3, 20.5, 13.8, -9.9]
-kalt = [n for n in t_c if n < 0]
-warm = [n for n in t_c if n > 0]
-
-t_f = [t * (9 / 5) + 32 for t in t_c]
-
-satz = "Man muss nicht alles wissen"
-l1 = [satz[i] for i in range(0, len(satz))]
-vowels = ['a', 'e', 'i', 'o', 'u']
-l2 = [i for i in l1 if i.lower() not in vowels]
-print(l2)
+# t_c = [-17.2, 12.4, -2.5, 1.7, -5.3, 20.5, 13.8, -9.9]
+# kalt = [n for n in t_c if n < 0]
+# warm = [n for n in t_c if n > 0]
+#
+# t_f = [t * (9 / 5) + 32 for t in t_c]
+#
+# satz = "Man muss nicht alles wissen"
+# l1 = [satz[i] for i in range(0, len(satz))]
+# vowels = ['a', 'e', 'i', 'o', 'u']
+# l2 = [i for i in l1 if i.lower() not in vowels]
+# print(l2)
 
 
 def sieb_des_eratosthenes(n):
@@ -224,3 +208,18 @@ def cards():
     farben = ['Karo', 'Herz', 'Pik', 'Kreuz']
     symbole = ['7', '8', '9', 'Bube', 'Dame', 'Koenig', '10', 'Ass']
     karten = [[i, f] for f in farben for i in symbole]
+
+
+def self_zip():
+    damen = ['Maria', 'Anne', 'Else', 'Lisa']
+    herren = ['Hans', 'Leo', 'Tim', 'Sigi']
+    erg_zip = list(zip(damen, herren))
+    my_zip = [(damen[i-1], herren[i-1]) for i in range(0, len(damen))]
+
+
+
+def perfect_numbers(n):
+    list = [i for i in range(1, n+1) if i == sum(e for e in [d for d in range(1, n+1) if (mod(i, d) == 0) and (i is not d)])]
+    print(list)
+
+perfect_numbers(500)
