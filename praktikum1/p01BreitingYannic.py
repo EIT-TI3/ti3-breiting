@@ -57,7 +57,7 @@ mapping = {chr(buchstabe): code for code, buchstabe in enumerate(range(65, 127))
 # 2.1 Einzeichencode
 
 # Frage 3:
-# Da 65 den Buchstaben A in Ascii repr‰sentiert und A auf 0 gemappt wird
+# Da 65 den Buchstaben A in Ascii repr√§sentiert und A auf 0 gemappt wird
 
 # Frage 4:
 # !%$ABC

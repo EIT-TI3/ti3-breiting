@@ -38,7 +38,7 @@ def hello():
 
 # Aufgabe 3
 def calculate(a, b, c):
-    return (a+b) * c
+    return (a + b) * c
 
 
 def kot_arctan(number):
@@ -207,19 +207,90 @@ def sieb_des_eratosthenes(n):
 def cards():
     farben = ['Karo', 'Herz', 'Pik', 'Kreuz']
     symbole = ['7', '8', '9', 'Bube', 'Dame', 'Koenig', '10', 'Ass']
-    karten = [[i, f] for f in farben for i in symbole]
+    return [[i, f] for f in farben for i in symbole]
 
 
 def self_zip():
     damen = ['Maria', 'Anne', 'Else', 'Lisa']
     herren = ['Hans', 'Leo', 'Tim', 'Sigi']
     erg_zip = list(zip(damen, herren))
-    my_zip = [(damen[i-1], herren[i-1]) for i in range(0, len(damen))]
-
+    return [(damen[i - 1], herren[i - 1]) for i in range(0, len(damen))]
 
 
 def perfect_numbers(n):
-    list = [i for i in range(1, n+1) if i == sum(e for e in [d for d in range(1, n+1) if (mod(i, d) == 0) and (i is not d)])]
+    list = [i for i in range(1, n + 1) if
+            i == sum(e for e in [d for d in range(1, n + 1) if (mod(i, d) == 0) and (i is not d)])]
     print(list)
 
-perfect_numbers(500)
+
+def pretty_print(p):
+    output = ''
+    for idx, coefficient in enumerate(p):
+        if idx == 0:
+            output += str(p[0])
+        else:
+            output += f' {"-" if coefficient < 0 else "+"} {abs(coefficient)}*x^{idx}'
+    return output
+
+
+def add(p1, p2):
+    return tuple([sum(element) for element in zip(p1, p2)])
+
+
+def mul(p1, p2):
+    return tuple([element[0] * element[1] for element in zip(p1, p2)])
+
+
+def diff(p):
+    return tuple([index * number for index, number in enumerate(p)])
+
+
+def integrate(p):
+    return tuple([number / (index + 1) for index, number in enumerate(p)])
+
+
+def to_pig_latin(word):
+    if ord(word[0]) >= 90:
+        return str(word[2::] + word[0:2])
+    else:
+        return str(word[2].upper() + word[3::] + word[0:2].lower())
+
+
+def from_pig_latin(word):
+    if ord(word[0]) >= 90:
+        return str(word[-1:-2] + word[2::])
+    else:
+        return str(word[-2].upper() + word[-1] + word[:-2].lower())
+
+
+def from_pig_zeile(zeile):
+    output = ''
+    for word in [to_pig_latin(word) for word in zeile.split()]:
+        output += word + ' '
+    return output
+
+
+def from_pig_latin_zeile(zeile):
+    output = ''
+    for word in [from_pig_zeile(word) for word in zeile.split()]:
+        output += word + ' '
+    return output
+
+
+def to_pig_latin_file(file_name='C:/Users/Yanni/Documents/GitHub/ti3/pig_latin.txt',
+                      file_name_pig='C:/Users/Yanni/Documents/GitHub/ti3/pig_latin.txt'):
+    try:
+        with open(file_name, 'r') as file:
+            text = file.readlines()
+    except FileNotFoundError:
+        print('Datein konnte nicht gefunden werden!')
+
+    new_text = ''
+    for lines in text:
+        new_text += f'{from_pig_zeile(lines)}\n'
+    try:
+        with open(file_name_pig, 'w') as new_file:
+            new_file.write(str(new_text))
+    except Exception as e:
+        print(e)
+

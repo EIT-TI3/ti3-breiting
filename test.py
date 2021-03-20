@@ -18,14 +18,7 @@ def test_add():
     assert add(tuple(), tuple()) == tuple()
 
 
-def pretty_print(p):
-    output = ''
-    for idx, coefficient in enumerate(p):
-        if idx == 0:
-            output += str(p[0])
-        else:
-            output += f' {"-" if coefficient < 0 else "+"} {abs(coefficient)}*x^{idx}'
-    return output
+
 
 def add(p1, p2):
     pass
