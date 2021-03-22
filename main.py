@@ -246,7 +246,7 @@ def diff(p):
 
 
 def integrate(p):
-    return tuple([number / (index + 1) for index, number in enumerate(p)])
+    return tuple(list(p[0]).extend([number / index for index, number in enumerate(p) if index != 0]))
 
 
 def to_pig_latin(word):
@@ -294,3 +294,4 @@ def to_pig_latin_file(file_name='C:/Users/Yanni/Documents/GitHub/ti3/pig_latin.t
     except Exception as e:
         print(e)
 
+print(integrate((2,2,2,2)))
