@@ -1,7 +1,12 @@
 import cmath
+import csv
 import datetime
+import math
+from itertools import chain
 
 from operator import mod
+from random import randint
+
 from numpy.ma import arctan
 
 import stack
@@ -14,6 +19,7 @@ def ggT(a, b):
         return ggT(b, mod(a, b))
 
 
+# S. 12
 def magic(l, r):
     p = 0
     if r == 0:
@@ -25,26 +31,28 @@ def magic(l, r):
         return p
 
 
-# Aufgabe 1
+# S. 46, Aufgabe 1
 def python():
     return '+--------+\n'' + Python + \n''+--------+\n'
 
 
-# Aufgabe 2
+# S. 46, Aufgabe 2
 def hello():
     name, surename = input('Bitte gib deinen Vor&Nachnamen ein!').split(' ')
     print(f'Guten Tag {name} {surename}')
 
 
-# Aufgabe 3
+# S. 46, Aufgabe 3
 def calculate(a, b, c):
     return (a + b) * c
 
 
-def kot_arctan(number):
+# S. 46
+def calc_arctan(number):
     return arctan(number)
 
 
+# S. 47
 def days_parsed(a, b):
     d1, m1, y1, = a.split('.')
     d2, m2, y2, = b.split('.')
@@ -153,6 +161,7 @@ def sort_string(string):
     return out
 
 
+# S. 128
 def check_c_code():
     file_name = 'mittel.c'
     stapel = stack.Stack()
@@ -190,26 +199,26 @@ def check_c_code():
 # l2 = [i for i in l1 if i.lower() not in vowels]
 # print(l2)
 
-
+# S. 137
 def sieb_des_eratosthenes(n):
-    l = list(range(2, n))
-    p = []
+    l, p = list(range(2, n)), []
 
     while l[0] ** 2 < n:
         p.append(l[0])
-        filter = [n for n in l if mod(n, l[0]) == 0]
-        for i in filter:
+        for i in [n for n in l if mod(n, l[0]) == 0]:
             l.remove(i)
-    p.append(l)
+    p += l
     print(f'Gefundene Primzahlen: {p}')
 
 
+# S.138
 def cards():
     farben = ['Karo', 'Herz', 'Pik', 'Kreuz']
     symbole = ['7', '8', '9', 'Bube', 'Dame', 'Koenig', '10', 'Ass']
     return [[i, f] for f in farben for i in symbole]
 
 
+# S.138
 def self_zip():
     damen = ['Maria', 'Anne', 'Else', 'Lisa']
     herren = ['Hans', 'Leo', 'Tim', 'Sigi']
@@ -217,10 +226,15 @@ def self_zip():
     return [(damen[i - 1], herren[i - 1]) for i in range(0, len(damen))]
 
 
+# S.138
 def perfect_numbers(n):
     list = [i for i in range(1, n + 1) if
             i == sum(e for e in [d for d in range(1, n + 1) if (mod(i, d) == 0) and (i is not d)])]
     print(list)
+
+
+def potenz_mengeL(m):
+    return
 
 
 def pretty_print(p):
@@ -294,4 +308,330 @@ def to_pig_latin_file(file_name='C:/Users/Yanni/Documents/GitHub/ti3/pig_latin.t
     except Exception as e:
         print(e)
 
-print(integrate((2,2,2,2)))
+
+def haeufogkeit(zeile):
+    chars = dict()
+    for char in [char.upper() for char in zeile]:
+        if char in chars:
+            chars[char] = chars[char] + 1
+        elif char.isalpha():
+            chars[char] = 1
+
+    output = ''
+    idx = 0
+    for letter, number in chars.items():
+        idx += 1
+        output += f'{letter} :   {number}   '
+        if idx % 4 == 0:
+            output += '\n'
+    return output
+
+
+def wortschatz(file_name='C:/Users/Yanni/Documents/GitHub/ti3/win1.txt'):
+    unic_words = dict()
+    all_words = 0
+
+    try:
+        file = open(file_name, 'r', errors='ignore')
+    except Exception as e:
+        print(e)
+        return
+
+    text = file.readlines()
+    for lines in text:
+        for word in lines.split(' '):
+            all_words += 1
+            if word in unic_words:
+                unic_words[word] += 1
+            else:
+                unic_words[word] = 1
+    quotient = len(unic_words) / all_words
+    print(f'unterschiedliche Wörter: {len(unic_words)}, Wörter total: {all_words}, Quotient: {quotient}')
+
+
+def read_csv():
+    umsatz_dict = dict()
+
+    with open('C:/Users/Yanni/Documents/GitHub/ti3/getreanke.csv', newline='') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            values = row[0].split(';')
+            umsatz_dict[values[0]] = [float(e) for e in values[1:]]
+    return umsatz_dict
+
+
+def berechne_summen_ueber_laeden(umsatz_dict):
+    for getraenk in umsatz_dict:
+        umsatz_dict[getraenk].append(sum(umsatz_dict[getraenk]))
+    return umsatz_dict
+
+
+def berechne_getraenke_summmen(umsatz_dict):
+    umsatz_dict['Summe'] = []
+    for i in range(4):
+        summe = 0
+        for getraenk in umsatz_dict:
+            if getraenk != 'Summe':
+                summe += umsatz_dict[getraenk][i]
+        umsatz_dict['Summe'].append(summe)
+
+
+def print_umsatz(umsatz_dict):
+    output = 'Getraenk    Laden 0     Laden1     Summe\n'
+    for getraenk in umsatz_dict:
+        output += f'{getraenk}'
+        for i in range(4):
+            output += f'   {umsatz_dict[getraenk][i]}'
+        output += '\n'
+    print(output)
+
+
+def get_min_umsatz(umsatz_dict):
+    pass
+
+
+def read_data(file_name='C:/Users/Yanni/Documents/GitHub/ti3/stichworte.txt'):
+    try:
+        with open(file_name, 'r') as file:
+            text = file.readlines()
+    except Exception as e:
+        print(e)
+
+    stichwoerter = dict()
+    for line in text:
+        key = line.split(':')[0]
+        value = line[:-1].split(':')[1]
+        if key not in stichwoerter.keys():
+            stichwoerter[key] = [value]
+        elif value not in stichwoerter[key]:
+            stichwoerter[key].append(value)
+    return stichwoerter
+
+
+def print_index(stichwoerter):
+    output = ''
+    unique_types = set([value for value in chain.from_iterable(stichwoerter.values())])
+    for e in unique_types:
+        output += f'{e}      :'
+        for i in stichwoerter.items():
+            if e in i[1]:
+                output += f'  {i[0]},'
+        output += '\n'
+    print(output)
+
+
+# S. 191
+def drei_teilbar(n):
+    return True if mod(n, 3) == 0 else False
+
+
+def compare_number1(n):
+    return True if (1 / 3 <= n <= 8 / 13) else False
+
+
+def compare_number2(n):
+    return True if (1 / 3 <= n <= 8 / 13) or (350 <= n <= 400) else False
+
+
+def compare_number3(n):
+    return True if not (0 <= n <= 100) or (350 <= n <= 400) else False
+
+
+# S. 191 Aufgabe 5
+#
+# if betreg <= stand:
+#   stand -= betrag
+# if betrag > stand:
+#   stand -= betrag
+#   stand -= gebuehr
+
+def mehrfach_teilbar(n):
+    if mod(n, 2) + mod(n, 3) == 0:
+        print('Teilbar durch 2 und 3!')
+    elif mod(n, 2) == 0:
+        print('Teilbar durch 2!')
+    elif mod(n, 3) == 0:
+        print('Teilbar durch 3!')
+    else:
+        print('Zahl ist nicht durch 2 oder 3 teilbar!')
+
+
+def rabattfunktion(n, k):
+    if 1 <= n <= 100 and k == 0:
+        print('3%')
+    elif 1 <= n <= 100 and k != 0:
+        print('5%')
+    elif n >= 100 and k == 0:
+        print('10%')
+    elif n >= 100 and k != 0:
+        print('15%')
+
+
+def compare_number(a, b, c):
+    if a < b and a < c:
+        return a
+    elif b < a and b < c:
+        return b
+    elif c < a and c < b:
+        return c
+
+
+def kleiner_gauss(n):
+    summe = 0
+    for i in range(n + 1):
+        summe += i
+    return summe
+
+
+def faculty(n):
+    produkt = 1
+    for i in range(1, n + 1):
+        produkt *= i
+    return produkt
+
+
+def verdopplung_startkapital(k_0=1000, z=0.03):
+    k = k_0
+    n = 0
+    while k < 2 * k_0:
+        n += 1
+        k = k + k * z
+    return n
+
+
+def quersumme(n):
+    ziffern = str(n)
+    quer_summe = 0
+    for i in range(len(ziffern)):
+        quer_summe += int(ziffern[i])
+    print(f'Ziffern: {len(ziffern)}\n'
+          f'Quersumme: {quer_summe}')
+
+
+def babylonisches_wurzelziehen(n):
+    x = n
+    a = n
+    e = 10 ** (-8)
+    while abs(my_squirt(x, a) - x) > e:
+        x = my_squirt(x, a)
+        a = (2 * my_squirt(x, a) - x) * x
+        if abs(my_squirt(x, a) - a) < e:
+            continue
+    return x
+
+
+def my_squirt(n, a):
+    return 1 / 2 * (n + a / n)
+
+
+# S. 219
+def tannenbaum(h):
+    output = ''
+    n = 2 * h - 1
+    for idx, i in enumerate(range(1, n + 1, 2)):
+        output += ' ' * (n - idx) + '*' * i + '\n'
+    output += ' ' * n + '*' + '\n'
+    return output
+
+
+def diamant(h):
+    output = ''
+    n = 2 * h - 1
+    for idx, i in enumerate(range(1, n + 1, 2)):
+        output += ' ' * (n - idx) + '*' * i + '\n'
+    l = len(output.split('\n'))
+    for idx, i in enumerate(range(n, 0, -2)):
+        if idx > 0:
+            output += ' ' * (l + idx - 1) + '*' * i + '\n'
+    print(output)
+
+
+def wuerfelspiel():
+    money = 100000
+    zug = [0, 0, 0, 0]
+    while money > 0:
+        zug[0] += 1
+        money -= 1
+        number = randint(1, 6) + randint(1, 6)
+
+        if number == 10:
+            zug[1] += 1
+            money += 1
+        elif number == 11:
+            zug[2] += 1
+            money += 5
+        elif number == 12:
+            zug[3] += 1
+            money += 10
+
+        print(f'Züge:  {zug[0]}\n'
+              f'Geld:   {money}\n'
+              f'Summe 10: {zug[1] * 100 / zug[0]}%\n'
+              f'Summe 11: {zug[2] * 100 / zug[0]}%\n'
+              f'Summe 12: {zug[3] * 100 / zug[0]}%\n')
+
+
+def bino(n, k):
+    return faculty(n) / (faculty(k) * faculty(n - k))
+
+
+def ist_dreiecks(n):
+    x = - 1 / 2 + math.sqrt(1 / 4 + 2 * n)
+    return True if abs(int(x) - x) < 10 ** (-8) else False
+
+
+def rahmen(namen):
+    output = ''
+    for i in range(3):
+        if i == 1:
+            output += f'|{namen}|\n'
+        else:
+            output += '+' + '-' * len(namen) + '+\n'
+    print(output)
+
+
+counter = 0
+
+
+# S. 235
+def countUp(n):
+    global counter
+    counter += 1
+    if n == 0:
+        return
+    print(counter)
+    countUp(n - 1)
+
+
+# S. 235
+def countDown(n):
+    if n == 0:
+        return
+    print(n)
+    countDown(n - 1)
+
+
+def quer_summe(n):
+    pass
+
+
+# S. 236
+def isPalindrom(wort):
+    if len(wort) <= 1:
+        print('Wort ist ein Palindrom')
+    elif wort[0].lower() == wort[-1].lower():
+        isPalindrom(wort[1:-1])
+    else:
+        print('Wort ist kein Palindrom')
+
+
+def fib(n):
+    f1, f2 = 0, 1
+    for i in range(n):
+        if i == 0:
+            yield f1
+        elif i == 1:
+            yield f2
+        else:
+            f1, f2 = f2, f1 + f2
+            yield f2
