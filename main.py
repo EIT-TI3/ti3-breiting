@@ -124,7 +124,7 @@ def mitternachtsformel(a, b, c):
 
 def convert_str():
     s = '0123456789'
-    print(s[1:len(s)])
+    print(s[1:])
     print(s[0:-1])
     print(s[2:])
     print(s[0:-2])
@@ -229,7 +229,7 @@ def self_zip():
 # S.138
 def perfect_numbers(n):
     list = [i for i in range(1, n + 1) if
-            i == sum(e for e in [d for d in range(1, n + 1) if (mod(i, d) == 0) and (i is not d)])]
+            i == sum([d for d in range(1, n + 1) if (mod(i, d) == 0) and (i is not d)])]
     print(list)
 
 
@@ -260,7 +260,7 @@ def diff(p):
 
 
 def integrate(p):
-    return tuple(list(p[0]).extend([number / index for index, number in enumerate(p) if index != 0]))
+    return tuple([p[0]] + [number / (index + 1) for index, number in enumerate(p)])
 
 
 def to_pig_latin(word):
@@ -420,31 +420,35 @@ def print_index(stichwoerter):
     print(output)
 
 
-# S. 191
+# S. 191 Aufgabe 1
 def drei_teilbar(n):
     return True if mod(n, 3) == 0 else False
 
 
+# S. 191 Aufgabe 2
 def compare_number1(n):
     return True if (1 / 3 <= n <= 8 / 13) else False
 
 
+# S. 191 Aufgabe 3
 def compare_number2(n):
     return True if (1 / 3 <= n <= 8 / 13) or (350 <= n <= 400) else False
 
 
+# S. 191 Aufgabe 4
 def compare_number3(n):
     return True if not (0 <= n <= 100) or (350 <= n <= 400) else False
 
 
 # S. 191 Aufgabe 5
-#
-# if betreg <= stand:
+
+# if betrag <= stand:
 #   stand -= betrag
 # if betrag > stand:
 #   stand -= betrag
 #   stand -= gebuehr
 
+# S. 192 Aufgabe 6
 def mehrfach_teilbar(n):
     if mod(n, 2) + mod(n, 3) == 0:
         print('Teilbar durch 2 und 3!')
@@ -456,6 +460,7 @@ def mehrfach_teilbar(n):
         print('Zahl ist nicht durch 2 oder 3 teilbar!')
 
 
+# S. 192 Aufgabe 7
 def rabattfunktion(n, k):
     if 1 <= n <= 100 and k == 0:
         print('3%')
@@ -467,6 +472,7 @@ def rabattfunktion(n, k):
         print('15%')
 
 
+# S. 192 Aufgabe 8
 def compare_number(a, b, c):
     if a < b and a < c:
         return a
@@ -474,6 +480,74 @@ def compare_number(a, b, c):
         return b
     elif c < a and c < b:
         return c
+
+
+# S. 192 Aufgabe 9
+def check_input(func_input):
+    vowels = ['a', 'e', 'i', 'o', 'u']
+    try:
+        int(func_input)
+        print('Eingabe ist eine Zahl ')
+        return
+    except ValueError:
+        pass
+
+    if 65 <= ord(func_input) <= 90:
+        if func_input.lower() in vowels:
+            print('Eingabe ist ein Großbuchstabe und ein Vokal!')
+        else:
+            print('Eingabe ist ein Großbuchstabe und ein Konsonant!')
+        return
+    elif 97 <= ord(func_input) <= 122:
+        if func_input in vowels:
+            print('Eingabe ist ein Kleinbuchstabe und ein Vokal!')
+        else:
+            print('Eingabe ist ein Kleinbuchstabe und ein Konsonant!')
+        return
+    else:
+        print('Eingabe konnte nicht zugeordnet werden!')
+        return
+
+
+# S. 195 Aufgabe 10
+def calc_func(x):
+    if -2 < x <= 3 or 4 <= x <= 5:
+        return x ** 2 + 2 / 3 * x
+    elif 5 < x < 6 or 10 <= x < 11:
+        return math.sin(x)
+    else:
+        return math.cos(x)
+
+
+# S. 195 Aufgabe 11
+def check_schaltjahr(n):
+    if n % 4 == 0:
+        return False if (n % 100 == 0) and (n % 400 != 0) else True
+    return False
+
+
+# S. 196 Aufgabe 12
+def erdbeben_skala():
+    s_input = input("Welche Staerke?")
+    s = float(s_input)
+
+    if 0 <= s < 3.5:
+        print("wird nicht bemerkt")
+    elif 3.5 <= s < 4.5:
+        print("leichte Zerstoerung")
+    elif 4.5 <= s < 6.0:
+        print("mittlere Zerstoerung")
+    elif 6.0 <= s < 8.0:
+        print("starke Zerstoerung")
+    elif s >= 8.0:
+        print("alles wird zerstoert")
+    else:
+        print("falsche Eingabe")
+
+
+# S.200
+def betragsfunction(x):
+    return x if x >= 0 else -x
 
 
 def kleiner_gauss(n):
@@ -516,7 +590,7 @@ def babylonisches_wurzelziehen(n):
         x = my_squirt(x, a)
         a = (2 * my_squirt(x, a) - x) * x
         if abs(my_squirt(x, a) - a) < e:
-            continue
+            break
     return x
 
 
