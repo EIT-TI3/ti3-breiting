@@ -81,8 +81,8 @@ botschaft = 'SLCVZCILAG'
 
 botschaft_val = [ord(char) - 65 for char in botschaft]
 
-code_long = divmod(len(botschaft), len(code_wort))[0] * code_wort + code_wort[
-                                                                    :divmod(len(botschaft), len(code_wort))[1]]
+code_long = divmod(len(botschaft), len(code_wort))[0] * code_wort + \
+            code_wort[:divmod(len(botschaft), len(code_wort))[1]]
 
 code_val = [ord(char) - 65 for char in code_long]
 

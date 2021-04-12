@@ -1,0 +1,40 @@
+EMPTY = ' '
+SHIP = 'X'
+
+
+def create_area(size):
+    return [[EMPTY for _ in range(size[1])] for _ in range(size[0])] if 2 <= size[0] <= 10 or 2 <= size[
+        1] <= 10 else None
+
+
+def fill_area(area, p0, is_horiz, length):
+    row, col = p0[1], p0[1]
+    if is_horiz:
+
+        area[row][col:col + length] = SHIP * length
+    else:
+        for i in range(row, row + length):
+            area[i][col] = SHIP
+
+
+def print_area(area, title):
+    output = f"{title}\n"
+    width, height = len(area[0]), len(area)
+
+    output += print_column_numbers(width)
+
+    for i, row in enumerate(area):
+        output += f"{i}|{''.join(row)}|\n"
+
+    output += print_column_numbers(width)
+    print(output)
+
+
+def print_column_numbers(n):
+    return f" |{''.join([str(i) for i in range(n)])}|\n"
+
+
+area = create_area((10, 10))
+fill_area(area, (0, 0), True, 5)
+fill_area(area, (0, 3), False, 5)
+print_area(area, 'Sers')
