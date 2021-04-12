@@ -163,7 +163,7 @@ def sort_string(string):
 
 # S. 128
 def check_c_code():
-    file_name = 'mittel.c'
+    file_name = 'C:/Users/Yanni/Documents/GitHub/ti3/mittel.c'
     stapel = stack.Stack()
     paare = {'<': '>', '{': '}', '(': ')', '[': ']'}
     datei_zeilen = open(file_name, 'r').readlines()
@@ -617,11 +617,11 @@ def diamant(h):
     for idx, i in enumerate(range(n, 0, -2)):
         if idx > 0:
             output += ' ' * (l + idx - 1) + '*' * i + '\n'
-    print(output)
+    return output
 
 
 def wuerfelspiel():
-    money = 100000
+    money = 10000
     zug = [0, 0, 0, 0]
     while money > 0:
         zug[0] += 1
