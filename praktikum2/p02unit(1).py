@@ -1,7 +1,7 @@
 # (c) KJR
 
-from praktikum2 import p02YannicBreiting as p02
 import unittest
+import p02YannicBreitig as p02
 
 
 class Prak02Unit(unittest.TestCase):
@@ -65,6 +65,16 @@ class Prak02Unit(unittest.TestCase):
         self.assertTrue(p02.check_area(area, (4, 0), True, 4))
         self.assertTrue(p02.check_area(area, (5, 5), True, 3))
 
+        #  Proficheck Horizontal
+        self.assertFalse(p02.check_area(area, (1, 0), True, 2, profi_check=True))
+        self.assertFalse(p02.check_area(area, (0, 0), True, 8, profi_check=True))
+        self.assertFalse(p02.check_area(area, (2, 0), True, 8, profi_check=True))
+        self.assertFalse(p02.check_area(area, (6, 0), True, 8, profi_check=True))
+        self.assertTrue(p02.check_area(area, (3, 6), True, 2, profi_check=True))
+        self.assertTrue(p02.check_area(area, (4, 0), True, 3, profi_check=True))
+        self.assertTrue(p02.check_area(area, (5, 0), True, 3, profi_check=True))
+        self.assertTrue(p02.check_area(area, (3, 0), True, 3, profi_check=True))
+
         # Vertikal
         self.assertFalse(p02.check_area(area, (-1, 2), False, 4))
         self.assertFalse(p02.check_area(area, (0, 4), False, 4))
@@ -81,7 +91,17 @@ class Prak02Unit(unittest.TestCase):
         self.assertTrue(p02.check_area(area, (2, 5), False, 5))
         self.assertTrue(p02.check_area(area, (2, 6), False, 5))
 
-         
+        #  Proficheck Vertikal
+
+        self.assertTrue(p02.check_area(area, (0, 0), False, 7, profi_check=True))
+        self.assertFalse(p02.check_area(area, (0, 1), False, 7, profi_check=True))
+        self.assertFalse(p02.check_area(area, (0, 7), False, 7, profi_check=True))
+        self.assertTrue(p02.check_area(area, (3, 2), False, 4, profi_check=True))
+        self.assertFalse(p02.check_area(area, (2, 3), False, 5, profi_check=True))
+        self.assertFalse(p02.check_area(area, (2, 5), False, 5, profi_check=True))
+        self.assertTrue(p02.check_area(area, (3, 6), False, 4, profi_check=True))
+
+
     def count_X(self, area):
         counter = sum([l.count('X') for l in area])
         return counter
