@@ -37,7 +37,6 @@ def fill_area(area, p0, is_horiz, length):
     elif not is_horiz:
         for i in range(row, row + length):
             area[i][col] = SHIP
-    return
 
 
 def print_area(area, title):
@@ -59,7 +58,6 @@ def print_area(area, title):
     output += f" |{''.join([str(i) for i in range(width)])}|\n"
 
     print(output)
-    return
 
 
 def check_area(area, p0, is_horiz, length, profi_check=False):
@@ -117,7 +115,6 @@ def generate_boat(area, boat_spec):
             if check_area(area, p0, direction, boat_spec, profi_check=True):
                 fill_area(area, p0, direction, boat_spec)
                 break
-    return
 
 
 def _horiz_check(area, row, col, length, profi_check=False):
