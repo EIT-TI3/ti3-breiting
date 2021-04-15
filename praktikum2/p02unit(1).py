@@ -5,7 +5,7 @@ import p02YannicBreitig as p02
 
 
 class Prak02Unit(unittest.TestCase):
-    
+
     def testAufgabe1(self):
         print("\nTest zu Aufgabe 1")
         area = p02.create_area((1, 5))
@@ -24,8 +24,7 @@ class Prak02Unit(unittest.TestCase):
         self.assertEqual(len(area), m)
         self.assertEqual(len(area[0]), n)
         self.assertFalse(id(area[0]) == id(area[1]))
-    
-     
+
     def testAufgabe2(self):
         print("\nTest zu Aufgabe 2")
         m = 7
@@ -40,7 +39,6 @@ class Prak02Unit(unittest.TestCase):
                              area[5][4] == 'X',
                              area[6][4] == ' ']))
 
-    
     def testAufgabe4(self):
         print("\nTest zu Aufgabe 4")
         m = 7
@@ -65,7 +63,7 @@ class Prak02Unit(unittest.TestCase):
         self.assertTrue(p02.check_area(area, (4, 0), True, 4))
         self.assertTrue(p02.check_area(area, (5, 5), True, 3))
 
-        #  Proficheck Horizontal
+        # Proficheck Horizontal
         self.assertFalse(p02.check_area(area, (1, 0), True, 2, profi_check=True))
         self.assertFalse(p02.check_area(area, (0, 0), True, 8, profi_check=True))
         self.assertFalse(p02.check_area(area, (2, 0), True, 8, profi_check=True))
@@ -91,16 +89,14 @@ class Prak02Unit(unittest.TestCase):
         self.assertTrue(p02.check_area(area, (2, 5), False, 5))
         self.assertTrue(p02.check_area(area, (2, 6), False, 5))
 
-        #  Proficheck Vertikal
-
-        self.assertTrue(p02.check_area(area, (0, 0), False, 7, profi_check=True))
+        # Proficheck Vertikal
+        self.assertFalse(p02.check_area(area, (2, 3), False, 5, profi_check=True))
+        self.assertFalse(p02.check_area(area, (2, 5), False, 5, profi_check=True))
         self.assertFalse(p02.check_area(area, (0, 1), False, 7, profi_check=True))
         self.assertFalse(p02.check_area(area, (0, 7), False, 7, profi_check=True))
         self.assertTrue(p02.check_area(area, (3, 2), False, 4, profi_check=True))
-        self.assertFalse(p02.check_area(area, (2, 3), False, 5, profi_check=True))
-        self.assertFalse(p02.check_area(area, (2, 5), False, 5, profi_check=True))
+        self.assertTrue(p02.check_area(area, (0, 0), False, 7, profi_check=True))
         self.assertTrue(p02.check_area(area, (3, 6), False, 4, profi_check=True))
-
 
     def count_X(self, area):
         counter = sum([l.count('X') for l in area])
@@ -122,7 +118,7 @@ class Prak02Unit(unittest.TestCase):
         m = 7
         n = 8
         area = p02.create_area((m, n))
-        boat_spec = {2: 3, 3: 2,  4: 1}
+        boat_spec = {2: 3, 3: 2, 4: 1}
         p02.generate_boat(area, boat_spec)
         self.assertEqual(self.count_X(area), 16)
 
