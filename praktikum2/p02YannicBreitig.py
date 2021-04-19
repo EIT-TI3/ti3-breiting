@@ -29,7 +29,7 @@ def create_area(size):
 
 def fill_area(board, p0, is_horiz, length):
     """
-    Fills the board elements with 'X' for the boat
+    Fills the board elements with 'SHIP' for the boat
 
     :param board: :list: Board to fill
     :param p0: :tuple: Start position
@@ -70,7 +70,7 @@ def print_area(board, title):
 
 def check_area(board, p0, is_horiz, length, profi_check=False):
     """
-    Validates the position of the new boat
+    Validates the position of a new boat
 
     :param board: :list: Board which gets tested
     :param p0: :tuple: Start position of the new boat
@@ -87,16 +87,42 @@ def check_area(board, p0, is_horiz, length, profi_check=False):
         validation = False
 
     elif is_horiz:
-        if not horiz_check(board, row, col, length):
+        if not check_horiz(board, row, col, length):
             validation = False
 
     else:
-        if not vertical_check(board, row, col, length):
+        if not check_vertical(board, row, col, length):
             validation = False
 
     if profi_check:
-        if 'X' in flatten(surrounding_field(board, row, col, length, is_horiz=is_horiz)):
+        if 'X' in flatten(surrounding_area(board, row, col, length, is_horiz=is_horiz)):
             validation = False
+
+    return validation
+
+
+def check_horiz(board, row, col, length):
+    width, height = len(board[0]), len(board)
+    validation = True
+
+    if col + length > width:
+        validation = False
+
+    elif 'X' in board[row][col:col + length]:
+        validation = False
+
+    return validation
+
+
+def check_vertical(board, row, col, length):
+    width, height = len(board[0]), len(board)
+    validation = True
+
+    if row + length > height:
+        validation = False
+
+    elif 'X' in [board[i][col] for i in range(row, row + length)]:
+        validation = False
 
     return validation
 
@@ -122,21 +148,45 @@ def generate_boat(board, boat_specs, profi_check=False, copy=None):
         while attempt <= MAX_ATTEMPTS:
             attempt += 1
 
+            # Random start location and orientation
             p0 = (randint(0, 9), randint(0, 9))
             is_horiz = choice([True, False])
 
-            if check_area(board, p0, is_horiz, boat_specs, profi_check):
+            if check_area(board, p0, is_horiz, boat_specs, profi_check=profi_check):
                 fill_area(board, p0, is_horiz, boat_specs)
                 break
         else:
+            # Gets called after reaching MAX_ATTEMPTS
             is_horiz = choice([True, False])
+            p0 = valid_boat_position(board, is_horiz, boat_specs)
 
+            # Sometimes no valid location exists
             try:
-                p0 = valid_boat_position(board, is_horiz, boat_specs)
                 fill_area(board, p0, is_horiz, boat_specs)
             except TypeError:
+                # Generate new board with recovered dict
                 board = create_area(STANDARD_SIZE)
                 generate_boat(board, copy, profi_check=profi_check)
+
+
+def surrounding_area(board, row, col, length=1, is_horiz=True, INDEX=False):
+    width, height = len(board[0]), len(board)
+
+    lower_col_bound, lower_row_bound = boundary(col - 1, width), boundary(row - 1, height)
+
+    upper_col_bound = boundary(col + length + 1, width) if is_horiz \
+        else boundary(col + 2, width)
+
+    upper_row_bound = boundary(row + 2, height) if is_horiz \
+        else boundary(row + length + 1, height)
+
+    index_list = [(row_idx, col_idx) for row_idx in range(lower_row_bound, upper_row_bound)
+                  for col_idx in range(lower_col_bound, upper_col_bound)]
+
+    area_list = [board[row_idx][lower_col_bound:upper_col_bound]
+                 for row_idx in range(lower_row_bound, upper_row_bound)]
+
+    return index_list if INDEX else area_list
 
 
 def valid_boat_position(board, is_horiz, length):
@@ -169,69 +219,12 @@ def index_generator(board, is_horiz=True):
                 yield (row, col) if is_horiz else (col, row)
 
 
-def horiz_check(board, row, col, length):
-    width, height = len(board[0]), len(board)
-    validation = True
-
-    if col + length > width:
-        validation = False
-
-    elif 'X' in board[row][col:col + length]:
-        validation = False
-
-    return validation
-
-
-def vertical_check(board, row, col, length):
-    width, height = len(board[0]), len(board)
-    validation = True
-
-    if row + length > height:
-        validation = False
-
-    elif 'X' in [board[i][col] for i in range(row, row + length)]:
-        validation = False
-
-    return validation
-
-
-def surrounding_field(board, row, col, length, is_horiz, INDEX=False):
-    """
-    Calculates the neighbours of the given position
-
-    :param board:
-    :param row:
-    :param col:
-    :param length:
-    :param is_horiz:
-    :param INDEX:
-    :return:
-    """
-    width, height = len(board[0]), len(board)
-
-    lower_col_bound, lower_row_bound = boundary(col - 1, width), boundary(row - 1, height)
-
-    upper_col_bound = boundary(col + length + 1, width) if is_horiz else boundary(col + 2, width)
-    upper_row_bound = boundary(row + 2, height) if is_horiz else boundary(row + length + 1, height)
-
-    index_list = [(row_idx, col_idx) for row_idx in range(lower_row_bound, upper_row_bound) for col_idx in
-                  range(lower_col_bound, upper_col_bound)]
-    field_list = [board[row_idx][lower_col_bound:upper_col_bound] for row_idx in
-                  range(lower_row_bound, upper_row_bound)]
-
-    return index_list if INDEX else field_list
-
-
 def boundary(value, limit):
     return min(limit, max(0, value))
 
 
 def flatten(nested_list):
     return [item for sublist in nested_list for item in sublist]
-
-
-def check_win(board):
-    return False if SHIP in flatten(board) else True
 
 
 def play_battleship(MODE='SOLO'):
@@ -262,12 +255,12 @@ def play_battleship(MODE='SOLO'):
 
         if active_player == 1:
             if MODE == 'PLAY':
-                print_area(player1['shots'], 'Deine Schüsse')
+                print_area(player1['shots'], 'Deine Schuesse')
                 row, col = tuple(int(x) for x in input().split(','))
             else:
                 row, col = optimized_turn(player1)
 
-            if player2['board'] == SHIP:
+            if player2['board'][row][col] == SHIP:
                 player1['shots'][row][col] = HIT
                 player2['board'][row][col] = HIT
             else:
@@ -276,8 +269,8 @@ def play_battleship(MODE='SOLO'):
 
         elif active_player == 2:
             row, col = optimized_turn(player2)
-            print_area(player2['shots'], 'Gegner Schüsse')
-            if player1['board'] == SHIP:
+            print_area(player2['shots'], 'Gegner Schuesse')
+            if player1['board'][row][col] == SHIP:
                 player2['shots'][row][col] = HIT
                 player1['board'][row][col] = HIT
             else:
@@ -293,9 +286,44 @@ def play_battleship(MODE='SOLO'):
         print_area(player1['shots'], 'Player1 shots')
 
 
+def check_win(board):
+    return False if SHIP in flatten(board) else True
+
+
+def optimized_turn(player):
+    shots = player['shots']
+    stack = player['stack']
+
+    if len(stack) > 0:
+        row, col = stack.pop()
+        if shots[row][col] == HIT:
+            for i, j in invalid_shots(shots, row, col):
+                if shots[i][j] == EMPTY:
+                    shots[i][j] = INVALID
+
+            for i, j in stack:
+                if shots[i][j] != EMPTY:
+                    stack.remove((i, j))
+
+            stack += [(i, j) for i, j in surrounding_area(shots, row, col, INDEX=True)
+                      if shots[i][j] == EMPTY and (i, j) not in stack]
+
+        if len(stack) == 0:
+            row, col = random_possible_shot(shots)
+            stack.append((row, col))
+
+        else:
+            row, col = stack[-1]
+
+    else:
+        row, col = random_possible_shot(shots)
+        stack.append((row, col))
+
+    return row, col
+
+
 def random_possible_shot(shots, PARITY=2):
     possible_shots = [idx for idx in index_generator(shots) if sum(idx) % PARITY == 0]
-
     try:
         row, col = possible_shots[randint(0, len(possible_shots) - 1)]
     except ValueError:
@@ -306,21 +334,22 @@ def random_possible_shot(shots, PARITY=2):
 
 def invalid_shots(board, row, col):
     result = []
-    surrounding_hits = [(row, col) for row, col in surrounding_field(board, row, col, 1, True, INDEX=True) if
-                        board[row][col] == HIT]
+    surrounding_hits = [(row, col) for row, col in surrounding_area(board, row, col, INDEX=True)
+                        if board[row][col] == HIT]
+
     if len(surrounding_hits) > 1:
         orientation = check_ship_orientation(surrounding_hits)
         if orientation is None:
             pass
         elif orientation == 'HORIZ':
-            result = [(row, col) for row, col in surrounding_field(board, row, col, 1, True, INDEX=True) if
-                      row != surrounding_hits[0][0]]
+            result = [(row, col) for row, col in surrounding_area(board, row, col, INDEX=True)
+                      if row != surrounding_hits[0][0]]
         elif orientation == 'VERTICAL':
-            result = [(row, col) for row, col in surrounding_field(board, row, col, 1, True, INDEX=True) if
-                      col != surrounding_hits[0][1]]
+            result = [(row, col) for row, col in surrounding_area(board, row, col, INDEX=True)
+                      if col != surrounding_hits[0][1]]
     else:
-        result = [idx for idx in surrounding_field(board, row, col, 1, True, INDEX=True) if
-                  idx[0] != row and idx[1] != col]
+        result = [idx for idx in surrounding_area(board, row, col, INDEX=True)
+                  if idx[0] != row and idx[1] != col]
 
     return result
 
@@ -336,38 +365,6 @@ def check_ship_orientation(idx_list):
             result = None
             break
     return result
-
-
-def optimized_turn(player):
-    shots = player['shots']
-    stack = player['stack']
-
-    if len(stack) > 0:
-        row, col = stack.pop()
-        if shots[row][col] == HIT:
-            for position in invalid_shots(shots, row, col):
-                if shots[position[0]][position[1]] == EMPTY:
-                    shots[position[0]][position[1]] = INVALID
-
-            for position in stack:
-                if shots[position[0]][position[1]] != EMPTY:
-                    stack.remove(position)
-
-            stack += [idx for idx in surrounding_field(shots, row, col, 1, True, INDEX=True)
-                      if shots[idx[0]][idx[1]] == EMPTY and idx not in stack]
-
-        if len(stack) == 0:
-            row, col = random_possible_shot(shots)
-            stack.append((row, col))
-
-        else:
-            row, col = stack[-1]
-
-    else:
-        row, col = random_possible_shot(shots)
-        stack.append((row, col))
-
-    return row, col
 
 
 if __name__ == '__main__':
