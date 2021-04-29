@@ -608,6 +608,15 @@ def tannenbaum(h):
     return output
 
 
+def dreieck(h):
+    output = ''
+    n = 2 * h - 1
+    for idx, i in enumerate(range(1, n + 1, 2)):
+        output += ' ' * (n - idx) + '*' * i + '\n'
+    return output
+
+
+
 def diamant(h):
     output = ''
     n = 2 * h - 1
@@ -709,3 +718,14 @@ def fib(n):
         else:
             f1, f2 = f2, f1 + f2
             yield f2
+
+
+def wuerfeln(n):
+    dist = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+    tries = 0
+    while n > tries:
+        tries += 1
+        p = randint(1, 6)
+        dist[p] += 1
+    print(dist)
+
