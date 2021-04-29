@@ -1,4 +1,3 @@
-from collections.abc import Mapping
 from random import randint, choice
 
 EMPTY = ' '
@@ -11,7 +10,7 @@ INVALID = 'I'
 STANDARD_SIZE = 10, 10
 MAX_ATTEMPTS = 100
 
-GAME_CONFIG = {5: 1, 4: 2, 3: 3, 2: 4}
+GAME_CONFIG = {5: 1, 4: 2, 3: 2, 2: 2}
 
 
 def create_area(size):
@@ -40,7 +39,7 @@ def fill_area(board, p0, is_horiz, length):
     row, col = p0
 
     if is_horiz:
-        board[row][col:col + length] = SHIP * length
+        board[row][col:col + length] = [SHIP] * length
 
     else:
         for i in range(row, row + length):
@@ -95,7 +94,7 @@ def check_area(board, p0, is_horiz, length, profi_check=False):
             validation = False
 
     if profi_check:
-        if 'X' in flatten(surrounding_area(board, row, col, length, is_horiz=is_horiz)):
+        if SHIP in flatten(surrounding_area(board, row, col, length, is_horiz=is_horiz)):
             validation = False
 
     return validation
@@ -108,7 +107,7 @@ def check_horiz(board, row, col, length):
     if col + length > width:
         validation = False
 
-    elif 'X' in board[row][col:col + length]:
+    elif SHIP in board[row][col:col + length]:
         validation = False
 
     return validation
@@ -121,7 +120,7 @@ def check_vertical(board, row, col, length):
     if row + length > height:
         validation = False
 
-    elif 'X' in [board[i][col] for i in range(row, row + length)]:
+    elif SHIP in [board[i][col] for i in range(row, row + length)]:
         validation = False
 
     return validation
@@ -137,12 +136,10 @@ def generate_boat(board, boat_specs, profi_check=False, copy=None):
     :param copy: :dict: Copy of boat_specs dict
     :return: :None:
     """
-    if isinstance(boat_specs, Mapping):
+    if type(boat_specs) == dict:
         for length, amount in boat_specs.items():
-            idx = 0
-            while idx < amount:
+            for _ in range(amount):
                 generate_boat(board, length, profi_check=profi_check, copy=boat_specs)
-                idx += 1
     else:
         attempt = 0
         while attempt <= MAX_ATTEMPTS:
@@ -150,14 +147,14 @@ def generate_boat(board, boat_specs, profi_check=False, copy=None):
 
             # Random start location and orientation
             p0 = (randint(0, 9), randint(0, 9))
-            is_horiz = choice([True, False])
+            is_horiz = choice((True, False))
 
             if check_area(board, p0, is_horiz, boat_specs, profi_check=profi_check):
                 fill_area(board, p0, is_horiz, boat_specs)
                 break
         else:
             # Gets called after reaching MAX_ATTEMPTS
-            is_horiz = choice([True, False])
+            is_horiz = choice((True, False))
             p0 = valid_boat_position(board, is_horiz, boat_specs)
 
             # Sometimes no valid location exists
