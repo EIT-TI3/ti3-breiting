@@ -128,68 +128,26 @@ def check_c_code():
 #
 
 
-# S. 137
-def sieb_des_eratosthenes(n):
-    l, p = list(range(2, n)), []
-
-    while l[0] ** 2 < n:
-        p.append(l[0])
-        for i in [n for n in l if mod(n, l[0]) == 0]:
-            l.remove(i)
-    p += l
-    print(f'Gefundene Primzahlen: {p}')
 
 
-# S.138
-def cards():
-    farben = ['Karo', 'Herz', 'Pik', 'Kreuz']
-    symbole = ['7', '8', '9', 'Bube', 'Dame', 'Koenig', '10', 'Ass']
-    return [[i, f] for f in farben for i in symbole]
 
 
-# S.138
-def self_zip():
-    damen = ['Maria', 'Anne', 'Else', 'Lisa']
-    herren = ['Hans', 'Leo', 'Tim', 'Sigi']
-    erg_zip = list(zip(damen, herren))
-    return [(damen[i - 1], herren[i - 1]) for i in range(0, len(damen))]
 
 
-# S.138
-def perfect_numbers(n):
-    list = [i for i in range(1, n + 1) if
-            i == sum([d for d in range(1, n + 1) if (mod(i, d) == 0) and (i is not d)])]
-    print(list)
+
+
+
+
+
+
+
 
 
 def potenz_mengeL(m):
     return
 
 
-def pretty_print(p):
-    output = ''
-    for idx, coefficient in enumerate(p):
-        if idx == 0:
-            output += str(p[0])
-        else:
-            output += f' {"-" if coefficient < 0 else "+"} {abs(coefficient)}*x^{idx}'
-    return output
 
-
-def add(p1, p2):
-    return tuple([sum(element) for element in zip(p1, p2)])
-
-
-def mul(p1, p2):
-    return tuple([element[0] * element[1] for element in zip(p1, p2)])
-
-
-def diff(p):
-    return tuple([index * number for index, number in enumerate(p)])
-
-
-def integrate(p):
-    return tuple([p[0]] + [number / (index + 1) for index, number in enumerate(p)])
 
 
 # S. 191 Aufgabe 1
