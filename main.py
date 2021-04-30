@@ -1,8 +1,8 @@
 import cmath
-import csv
+
 import datetime
 import math
-from itertools import chain
+
 
 from operator import mod
 from random import randint
@@ -31,72 +31,12 @@ def magic(l, r):
         return p
 
 
-# S. 46, Aufgabe 1
-def python():
-    return '+--------+\n'' + Python + \n''+--------+\n'
-
-
-# S. 46, Aufgabe 2
-def hello():
-    name, surename = input('Bitte gib deinen Vor&Nachnamen ein!').split(' ')
-    print(f'Guten Tag {name} {surename}')
-
-
-# S. 46, Aufgabe 3
-def calculate(a, b, c):
-    return (a + b) * c
-
-
-# S. 46
-def calc_arctan(number):
-    return arctan(number)
-
-
-# S. 47
-def days_parsed(a, b):
-    d1, m1, y1, = a.split('.')
-    d2, m2, y2, = b.split('.')
-    output = 0
-    d_diff = abs(int(d2) - int(d1))
-    d1, m1, y1 = int(d1), int(m1), int(y1)
-    d2, m2, y2 = int(d2), int(m2), int(y2)
-
-    for year in range(int(y1), int(y2) + 1):
-        if mod(y1 + year, 4) == 0:
-            output += 366
-        else:
-            output += 365
-
-    for month in range(int(m1), int(m2) + 1):
-        if m1 == 1:
-            output += 29
-        if mod(m1 + month, 2) == 0:
-            output += 30
-        else:
-            output += 31
-
-    print(output + d_diff)
-
-
-def days_parsed_time(a, b):
-    time1 = datetime.datetime.fromisoformat(a)
-    time2 = datetime.datetime.fromisoformat(b)
-    time_res = time1 - time2
-    print(abs(time_res))
-
-
 # l1 = [3]
 # l2 = [1, 2]
 # l3 = [l1, 4]
 # l4 = [l2, l3]
 # l5 = ['abc', l4, 5]
 # l1[0] = 42
-
-def format_seconds():
-    sec = int(input('Bitte die Sekunden angeben!'))
-    min, seconds = divmod(sec, 60)
-    hours, minutes = divmod(min, 60)
-    print(f'{hours}:{minutes}:{seconds}')
 
 
 def mitternachtsformel(a, b, c):
@@ -130,17 +70,10 @@ def convert_str():
     print(s[0:-2])
     print(s[1:-1])
     print(s[7] + s[4] + s[1])
-    print(s + rotate_str(s))
-    print(only_odd(s) + rotate_str(s)[0:])
+    print(s + s[::-1])
+    print(only_odd(s) + s[::-1][0:])
     odd_str = only_odd(s)
-    print(sort_string(odd_str) + rotate_str(sort_string(odd_str))[1:])
-
-
-def rotate_str(string):
-    out = ''
-    for e in range(0, len(string)):
-        out += string[-e - 1]
-    return out
+    print(sort_string(odd_str) + sort_string(odd_str)[::-1][1:])
 
 
 def only_odd(string):
@@ -193,11 +126,7 @@ def check_c_code():
 #
 # t_f = [t * (9 / 5) + 32 for t in t_c]
 #
-# satz = "Man muss nicht alles wissen"
-# l1 = [satz[i] for i in range(0, len(satz))]
-# vowels = ['a', 'e', 'i', 'o', 'u']
-# l2 = [i for i in l1 if i.lower() not in vowels]
-# print(l2)
+
 
 # S. 137
 def sieb_des_eratosthenes(n):
@@ -261,163 +190,6 @@ def diff(p):
 
 def integrate(p):
     return tuple([p[0]] + [number / (index + 1) for index, number in enumerate(p)])
-
-
-def to_pig_latin(word):
-    if ord(word[0]) >= 90:
-        return str(word[2::] + word[0:2])
-    else:
-        return str(word[2].upper() + word[3::] + word[0:2].lower())
-
-
-def from_pig_latin(word):
-    if ord(word[0]) >= 90:
-        return str(word[-1:-2] + word[2::])
-    else:
-        return str(word[-2].upper() + word[-1] + word[:-2].lower())
-
-
-def from_pig_zeile(zeile):
-    output = ''
-    for word in [to_pig_latin(word) for word in zeile.split()]:
-        output += word + ' '
-    return output
-
-
-def from_pig_latin_zeile(zeile):
-    output = ''
-    for word in [from_pig_zeile(word) for word in zeile.split()]:
-        output += word + ' '
-    return output
-
-
-def to_pig_latin_file(file_name='C:/Users/Yanni/Documents/GitHub/ti3/pig_latin.txt',
-                      file_name_pig='C:/Users/Yanni/Documents/GitHub/ti3/pig_latin.txt'):
-    try:
-        with open(file_name, 'r') as file:
-            text = file.readlines()
-    except FileNotFoundError:
-        print('Datein konnte nicht gefunden werden!')
-
-    new_text = ''
-    for lines in text:
-        new_text += f'{from_pig_zeile(lines)}\n'
-    try:
-        with open(file_name_pig, 'w') as new_file:
-            new_file.write(str(new_text))
-    except Exception as e:
-        print(e)
-
-
-def haeufogkeit(zeile):
-    chars = dict()
-    for char in [char.upper() for char in zeile]:
-        if char in chars:
-            chars[char] = chars[char] + 1
-        elif char.isalpha():
-            chars[char] = 1
-
-    output = ''
-    idx = 0
-    for letter, number in chars.items():
-        idx += 1
-        output += f'{letter} :   {number}   '
-        if idx % 4 == 0:
-            output += '\n'
-    return output
-
-
-def wortschatz(file_name='C:/Users/Yanni/Documents/GitHub/ti3/win1.txt'):
-    unic_words = dict()
-    all_words = 0
-
-    try:
-        file = open(file_name, 'r', errors='ignore')
-    except Exception as e:
-        print(e)
-        return
-
-    text = file.readlines()
-    for lines in text:
-        for word in lines.split(' '):
-            all_words += 1
-            if word in unic_words:
-                unic_words[word] += 1
-            else:
-                unic_words[word] = 1
-    quotient = len(unic_words) / all_words
-    print(f'unterschiedliche Wörter: {len(unic_words)}, Wörter total: {all_words}, Quotient: {quotient}')
-
-
-def read_csv():
-    umsatz_dict = dict()
-
-    with open('C:/Users/Yanni/Documents/GitHub/ti3/getreanke.csv', newline='') as csvfile:
-        reader = csv.reader(csvfile)
-        for row in reader:
-            values = row[0].split(';')
-            umsatz_dict[values[0]] = [float(e) for e in values[1:]]
-    return umsatz_dict
-
-
-def berechne_summen_ueber_laeden(umsatz_dict):
-    for getraenk in umsatz_dict:
-        umsatz_dict[getraenk].append(sum(umsatz_dict[getraenk]))
-    return umsatz_dict
-
-
-def berechne_getraenke_summmen(umsatz_dict):
-    umsatz_dict['Summe'] = []
-    for i in range(4):
-        summe = 0
-        for getraenk in umsatz_dict:
-            if getraenk != 'Summe':
-                summe += umsatz_dict[getraenk][i]
-        umsatz_dict['Summe'].append(summe)
-
-
-def print_umsatz(umsatz_dict):
-    output = 'Getraenk    Laden 0     Laden1     Summe\n'
-    for getraenk in umsatz_dict:
-        output += f'{getraenk}'
-        for i in range(4):
-            output += f'   {umsatz_dict[getraenk][i]}'
-        output += '\n'
-    print(output)
-
-
-def get_min_umsatz(umsatz_dict):
-    pass
-
-
-def read_data(file_name='C:/Users/Yanni/Documents/GitHub/ti3/stichworte.txt'):
-    try:
-        with open(file_name, 'r') as file:
-            text = file.readlines()
-    except Exception as e:
-        print(e)
-
-    stichwoerter = dict()
-    for line in text:
-        key = line.split(':')[0]
-        value = line[:-1].split(':')[1]
-        if key not in stichwoerter.keys():
-            stichwoerter[key] = [value]
-        elif value not in stichwoerter[key]:
-            stichwoerter[key].append(value)
-    return stichwoerter
-
-
-def print_index(stichwoerter):
-    output = ''
-    unique_types = set([value for value in chain.from_iterable(stichwoerter.values())])
-    for e in unique_types:
-        output += f'{e}      :'
-        for i in stichwoerter.items():
-            if e in i[1]:
-                output += f'  {i[0]},'
-        output += '\n'
-    print(output)
 
 
 # S. 191 Aufgabe 1
@@ -616,7 +388,6 @@ def dreieck(h):
     return output
 
 
-
 def diamant(h):
     output = ''
     n = 2 * h - 1
@@ -728,4 +499,3 @@ def wuerfeln(n):
         p = randint(1, 6)
         dist[p] += 1
     print(dist)
-
