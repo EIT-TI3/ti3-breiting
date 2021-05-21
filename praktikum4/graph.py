@@ -63,17 +63,17 @@ class Graph:
                 output = -1
                 break
             n1 = n2
+
         return output
 
-    # TODO: Haut noch nicht FEHLER
     @staticmethod
     def find_edge_between(n1, n2):
-        return Counter(list(yield_connections(n1)) + list(yield_connections(n2))).values()
+        set1, set2 = {edge.get_connect() for edge in n1.get_connects()}, {n2}
+        if (set1 & set2).pop():
+            for edge in n1.get_connects():
+                if edge.get_connect() is n2:
+                    return edge.weight
 
-
-def yield_connections(n):
-    for edges in n.get_connects():
-        yield edges.get_connect()
 
 
 if __name__ == '__main__':
