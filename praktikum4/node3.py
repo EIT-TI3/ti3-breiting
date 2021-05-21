@@ -1,3 +1,4 @@
+
 # (c) 2021 Yannic Breiting
 
 
@@ -21,7 +22,7 @@ class Node:
                     output += " " * len(self._name)
                 output += f" ---> {node.name}\n"
             output = output[:-1]
-        elif len(self._next) == 0:
+        else:
             output += " <end>"
 
         return output
