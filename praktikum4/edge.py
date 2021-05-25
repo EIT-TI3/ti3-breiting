@@ -3,20 +3,20 @@
 
 class Edge:
     def __init__(self, name, weight):
-        self._name = name
+        self.__name = name
         self.weight = weight
-        self._next = None
+        self.__next = None
 
     def connect(self, n):
-        self._next = n
+        self.__next = n
 
     def get_connect(self):
-        return self._next
+        return self.__next
 
     @property
     def name(self):
-        return self._name
+        return self.__name
 
     def __str__(self):
-        return f'{self._name}/{self.weight}'
+        return f'{self.__name}/{self.weight}'
 

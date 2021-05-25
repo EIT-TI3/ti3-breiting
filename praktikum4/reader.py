@@ -17,6 +17,7 @@ class Reader:
                 except:
                     name = None
                 self.g.new_node(name)
+
             elif child.tag.lower() == 'edge':
                 try:
                     self.g.new_edge(child.attrib['name'], int(child.attrib['weight']))
@@ -43,5 +44,5 @@ class Reader:
 
 if __name__ == '__main__':
     reader = Reader()
-    g = reader.read('C:/Users/Yanni/Documents/GitHub/ti3/praktikum4/Bahn.xml')
+    g = reader.read('Karte_int.xml')
     print(g)

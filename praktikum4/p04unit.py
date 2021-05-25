@@ -95,7 +95,6 @@ class Prak04Unit(unittest.TestCase):
         eb_new = g.find_edge("b")
         self.assertIsInstance(eb_new, edge.Edge)
         self.assertEqual(str(eb_new), "b/2")
-        print(e1)
 
     def testAufgabe33(self):
         print("Test zu Aufgabe 3.3")
@@ -138,7 +137,7 @@ class Prak04Unit(unittest.TestCase):
         import reader
         print("Test zu Aufgabe 4.1 bis 4.2")
         r1 = reader.Reader()
-        g1 = r1.read("Karte.xml")
+        g1 = r1.read("Karte_int.xml")
         s = str(g1)
         self.assertTrue("inzerer" in s)
         self.assertTrue("rresstr" in s)
