@@ -1,0 +1,606 @@
+<map>
+
+	<node name="A">
+		<next>Schwere-Reiter-Straße A-B</next>
+        <next>Dachauer Str. A-O</next>
+	</node>
+
+	<node name="B">
+        <next>Schwere-Reiter-Straße B-A</next>
+        <next>Schwere-Reiter-Straße B-C</next>
+        <next>Heßstraße B-AD</next>
+	</node>
+
+	<node name="C">
+        <next>Schwere-Reiter-Straße C-B</next>
+        <next>Schwere-Reiter-Straße C-D</next>
+        <next>Infanteriestraße C-AE</next>
+	</node>
+
+    <node name="D">
+        <next>Schwere-Reiter-Straße D-C</next>
+        <next>Schwere-Reiter-Straße D-E</next>
+        <next>Barbarastraße D-AE</next>
+    </node>
+
+    <node name="E">
+        <next>Schwere-Reiter-Straße E-D</next>
+        <next>Schwere-Reiter-Straße E-F</next>
+        <next>Elisabethstraße E-AB</next>
+    </node>
+
+    <node name="F">
+        <next>Schwere-Reiter-Straße F-E</next>
+        <next>Hohenzollerstraße F-G</next>
+        <next>Winzererstraße F-AA</next>
+    </node>
+
+    <node name="G">
+        <next>Hohenzollerstraße G-F</next>
+        <next>Schleißheimer Str. G-H</next>
+    </node>
+
+    <node name="H">
+        <next>Schleißheimer Str. H-G</next>
+        <next>Schleißheimer Str. H-AH</next>
+        <next>Elisabethstraße H-AA</next>
+    </node>
+
+    <node name="I">
+        <next>Schleißheimer Str. I-AH</next>
+        <next>Schleißheimer Str. I-J</next>
+        <next>Agnesstraße I-Y</next>
+    </node>
+
+    <node name="J">
+        <next>Schleißheimer Str. J-I</next>
+        <next>Schleißheimer Str. J-K</next>
+        <next>Georgenstraße J-W</next>
+    </node>
+
+    <node name="K">
+        <next>Schleißheimer Str. K-J</next>
+        <next>Schleißheimer Str. K-L</next>
+        <next>Görresstraße K-T</next>
+    </node>
+
+    <node name="L">
+        <next>Schleißheimer Str. L-K</next>
+        <next>Schleißheimer Str. L-M</next>
+        <next>Schellingstraße L-R</next>
+    </node>
+
+    <node name="M">
+        <next>Schleißheimer Str. M-L</next>
+        <next>Maßmannstraße M-N</next>
+    </node>
+
+    <node name="N">
+        <next>Dachauer Str. N-O</next>
+    </node>
+
+    <node name="O">
+        <next>Dachauer Str. O-A</next>
+        <next>Dachauer Str. O-N</next>
+        <next>Lothstraße O-P</next>
+    </node>
+
+    <node name="P">
+        <next>Lothstraße P-O</next>
+        <next>Lothstraße P-S</next>
+        <next>Heßstraße P-AD</next>
+        <next>Heßstraße P-AG</next>
+    </node>
+
+    <node name="Q">
+        <next>Heßstraße Q-M</next>
+        <next>Winzererstraße Q-R</next>
+    </node>
+
+    <node name="R">
+        <next>Schellingstraße R-L</next>
+        <next>Schellingstraße R-AF</next>
+        <next>Winzererstraße R-Q</next>
+        <next>Winzererstraße R-T</next>
+    </node>
+
+    <node name="S">
+        <next>Lothstraße S-P</next>
+        <next>Lothstraße S-U</next>
+        <next>Schellingstraße S-AF</next>
+    </node>
+
+    <node name="T">
+        <next>Görresstraße T-U</next>
+        <next>Görresstraße T-K</next>
+        <next>Winzererstraße T-R</next>
+        <next>Winzererstraße T-W</next>
+    </node>
+
+    <node name="U">
+        <next>Lothstraße U-S</next>
+        <next>Lothstraße U-V</next>
+        <next>Görresstraße U-T</next>
+        <next>Infanteriestraße U-AC</next>
+    </node>
+
+    <node name="V">
+        <next>Lothstraße V-U</next>
+        <next>Lothstraße V-X</next>
+        <next>Georgenstraße V-W</next>
+    </node>
+
+    <node name="W">
+        <next>Georgenstraße W-V</next>
+        <next>Georgenstraße W-J</next>
+        <next>Winzererstraße W-T</next>
+        <next>Winzererstraße W-X</next>
+    </node>
+
+    <node name="X">
+        <next>Lothstraße X-V</next>
+        <next>Winzererstraße X-Y</next>
+    </node>
+
+    <node name="Y">
+        <next>Winzererstraße Y-X</next>
+        <next>Winzererstraße Y-Z</next>
+        <next>Agnesstraße Y-I</next>
+    </node>
+
+    <node name="Z">
+        <next>Winzererstraße Z-Y</next>
+        <next>Winzererstraße Z-AA</next>
+        <next>Wormser Str. Z-AH</next>
+    </node>
+
+    <node name="AA">
+        <next>Winzererstraße AA-Z</next>
+        <next>Winzererstraße AA-F</next>
+        <next>Elisabethstraße AA-AB</next>
+        <next>Elisabethstraße AA-H</next>
+    </node>
+
+    <node name="AB">
+        <next>Elisabethstraße AB-E</next>
+        <next>Elisabethstraße AB-AA</next>
+        <next>Kathi-Kobus-Straße AB-AC</next>
+    </node>
+
+    <node name="AC">
+        <next>Infanteriestraße AC-AE</next>
+        <next>Infanteriestraße AC-U</next>
+        <next>Kathi-Kobus-Straße AC-AD</next>
+        <next>Kathi-Kobus-Straße AC-AB</next>
+    </node>
+
+    <node name="AD">
+        <next>Heßstraße AD-B</next>
+        <next>Heßstraße AD-P</next>
+        <next>Kathi-Kobus-Straße AD-AC</next>
+    </node>
+
+    <node name="AE">
+        <next>Infanteriestraße AE-C</next>
+        <next>Infanteriestraße AE-AC</next>
+        <next>Barbarastraße AE-D</next>
+    </node>
+
+    <node name="AF">
+        <next>Schellingstraße AF-S</next>
+        <next>Schellingstraße AF-R</next>
+        <next>Cranachstraße AF-AG</next>
+    </node>
+
+    <node name="AG">
+        <next>Heßstraße AG-Q</next>
+    </node>
+
+    <node name="AH">
+        <next>Schleißheimer Str. AH-H</next>
+        <next>Schleißheimer Str. AH-I</next>
+        <next>Wormser Str. AH-Z</next>
+    </node>
+
+
+    <edge name="Schwere-Reiter-Straße A-B" weight="192">
+        <next>B</next>
+    </edge>
+
+    <edge name="Schwere-Reiter-Straße B-A" weight="192">
+        <next>A</next>
+    </edge>
+
+    <edge name="Schwere-Reiter-Straße B-C" weight="289">
+        <next>C</next>
+    </edge>
+
+    <edge name="Schwere-Reiter-Straße C-B" weight="289">
+        <next>B</next>
+    </edge>
+
+    <edge name="Schwere-Reiter-Straße C-D" weight="282">
+        <next>D</next>
+    </edge>
+
+    <edge name="Schwere-Reiter-Straße D-C" weight="282">
+        <next>C</next>
+    </edge>
+
+    <edge name="Schwere-Reiter-Straße D-E" weight="102">
+        <next>E</next>
+    </edge>
+
+    <edge name="Schwere-Reiter-Straße E-D" weight="102">
+        <next>D</next>
+    </edge>
+
+    <edge name="Schwere-Reiter-Straße E-F" weight="267">
+        <next>F</next>
+    </edge>
+
+    <edge name="Schwere-Reiter-Straße F-E" weight="267">
+        <next>E</next>
+    </edge>
+
+    <edge name="Hohenzollerstraße F-G" weight="112">
+        <next>G</next>
+    </edge>
+
+    <edge name="Hohenzollerstraße G-F" weight="112">
+        <next>F</next>
+    </edge>
+
+    <edge name="Schleißheimer Str. G-H" weight="118">
+        <next>H</next>
+    </edge>
+
+    <edge name="Schleißheimer Str. H-G" weight="118">
+        <next>G</next>
+    </edge>
+
+    <edge name="Schleißheimer Str. H-AH" weight="84">
+        <next>AH</next>
+    </edge>
+
+    <edge name="Schleißheimer Str. AH-H" weight="84">
+        <next>H</next>
+    </edge>
+
+    <edge name="Schleißheimer Str. AH-I" weight="82">
+        <next>I</next>
+    </edge>
+
+    <edge name="Schleißheimer Str. I-AH" weight="82">
+        <next>AH</next>
+    </edge>
+
+    <edge name="Schleißheimer Str. I-J" weight="132">
+        <next>J</next>
+    </edge>
+
+    <edge name="Schleißheimer Str. J-I" weight="132">
+        <next>I</next>
+    </edge>
+
+    <edge name="Schleißheimer Str. J-K" weight="123">
+        <next>K</next>
+    </edge>
+
+    <edge name="Schleißheimer Str. K-J" weight="123">
+        <next>J</next>
+    </edge>
+
+    <edge name="Schleißheimer Str. K-L" weight="186">
+        <next>L</next>
+    </edge>
+
+    <edge name="Schleißheimer Str. L-K" weight="186">
+        <next>K</next>
+    </edge>
+
+    <edge name="Schleißheimer Str. L-M" weight="122">
+        <next>M</next>
+    </edge>
+
+    <edge name="Schleißheimer Str. M-L" weight="122">
+        <next>L</next>
+    </edge>
+
+    <edge name="Maßmannstraße M-N" weight="122">
+        <next>N</next>
+    </edge>
+
+    <edge name="Dachauer Str. A-O" weight="747">
+        <next>O</next>
+    </edge>
+
+    <edge name="Dachauer Str. O-A" weight="747">
+        <next>A</next>
+    </edge>
+
+    <edge name="Dachauer Str. O-N" weight="477">
+        <next>N</next>
+    </edge>
+
+    <edge name="Dachauer Str. N-O" weight="477">
+        <next>O</next>
+    </edge>
+
+    <edge name="Lothstraße O-P" weight="197">
+        <next>P</next>
+    </edge>
+
+    <edge name="Lothstraße P-O" weight="197">
+        <next>O</next>
+    </edge>
+
+    <edge name="Lothstraße P-S" weight="116">
+        <next>S</next>
+    </edge>
+
+    <edge name="Lothstraße S-P" weight="116">
+        <next>P</next>
+    </edge>
+
+    <edge name="Lothstraße S-U" weight="120">
+        <next>U</next>
+    </edge>
+
+    <edge name="Lothstraße U-S" weight="120">
+        <next>S</next>
+    </edge>
+
+    <edge name="Lothstraße U-V" weight="155">
+        <next>V</next>
+    </edge>
+
+    <edge name="Lothstraße V-U" weight="155">
+        <next>U</next>
+    </edge>
+
+    <edge name="Lothstraße V-X" weight="72">
+        <next>X</next>
+    </edge>
+
+    <edge name="Lothstraße X-V" weight="72">
+        <next>V</next>
+    </edge>
+
+    <edge name="Winzererstraße Q-R" weight="116">
+        <next>R</next>
+    </edge>
+
+    <edge name="Winzererstraße R-Q" weight="116">
+        <next>Q</next>
+    </edge>
+
+    <edge name="Winzererstraße R-T" weight="161">
+        <next>T</next>
+    </edge>
+
+    <edge name="Winzererstraße T-R" weight="161">
+        <next>R</next>
+    </edge>
+
+    <edge name="Winzererstraße T-W" weight="140">
+        <next>W</next>
+    </edge>
+
+    <edge name="Winzererstraße W-T" weight="140">
+        <next>T</next>
+    </edge>
+
+    <edge name="Winzererstraße W-X" weight="69">
+        <next>X</next>
+    </edge>
+
+    <edge name="Winzererstraße X-Y" weight="50">
+        <next>Y</next>
+    </edge>
+
+    <edge name="Winzererstraße Y-X" weight="50">
+        <next>X</next>
+    </edge>
+
+    <edge name="Winzererstraße Y-Z" weight="82">
+        <next>Z</next>
+    </edge>
+
+     <edge name="Winzererstraße Z-Y" weight="82">
+        <next>Y</next>
+    </edge>
+
+    <edge name="Winzererstraße Z-AA" weight="86">
+        <next>AA</next>
+    </edge>
+
+    <edge name="Winzererstraße AA-Z" weight="86">
+        <next>Z</next>
+    </edge>
+
+    <edge name="Winzererstraße AA-F" weight="117">
+        <next>F</next>
+    </edge>
+
+    <edge name="Winzererstraße F-AA" weight="117">
+        <next>AA</next>
+    </edge>
+
+    <edge name="Heßstraße B-AD" weight="439">
+        <next>AD</next>
+    </edge>
+
+    <edge name="Heßstraße AD-B" weight="439">
+        <next>B</next>
+    </edge>
+
+    <edge name="Heßstraße AD-P" weight="304">
+        <next>P</next>
+    </edge>
+
+    <edge name="Heßstraße P-AD" weight="304">
+        <next>AD</next>
+    </edge>
+
+    <edge name="Heßstraße P-AG" weight="88">
+        <next>AG</next>
+    </edge>
+
+    <edge name="Heßstraße AG-Q" weight="205">
+        <next>Q</next>
+    </edge>
+
+    <edge name="Heßstraße Q-M" weight="138">
+        <next>M</next>
+    </edge>
+
+    <edge name="Infanteriestraße C-AE" weight="202">
+        <next>AE</next>
+    </edge>
+
+    <edge name="Infanteriestraße AE-C" weight="202">
+        <next>C</next>
+    </edge>
+
+    <edge name="Infanteriestraße AE-AC" weight="143">
+        <next>AC</next>
+    </edge>
+
+    <edge name="Infanteriestraße AC-AE" weight="143">
+        <next>AE</next>
+    </edge>
+
+    <edge name="Infanteriestraße AC-U" weight="302">
+        <next>U</next>
+    </edge>
+
+    <edge name="Infanteriestraße U-AC" weight="302">
+        <next>AC</next>
+    </edge>
+
+    <edge name="Schellingstraße S-AF" weight="71">
+        <next>AF</next>
+    </edge>
+
+    <edge name="Schellingstraße AF-S" weight="71">
+        <next>S</next>
+    </edge>
+
+    <edge name="Schellingstraße AF-R" weight="154">
+        <next>R</next>
+    </edge>
+
+    <edge name="Schellingstraße R-AF" weight="154">
+        <next>AF</next>
+    </edge>
+
+    <edge name="Schellingstraße R-L" weight="130">
+        <next>L</next>
+    </edge>
+
+    <edge name="Schellingstraße L-R" weight="130">
+        <next>R</next>
+    </edge>
+
+    <edge name="Elisabethstraße E-AB" weight="63">
+        <next>AB</next>
+    </edge>
+
+    <edge name="Elisabethstraße AB-E" weight="63">
+        <next>E</next>
+    </edge>
+
+    <edge name="Elisabethstraße AB-AA" weight="220">
+        <next>AA</next>
+    </edge>
+
+    <edge name="Elisabethstraße AA-AB" weight="220">
+        <next>AB</next>
+    </edge>
+
+    <edge name="Elisabethstraße AA-H" weight="118">
+        <next>H</next>
+    </edge>
+
+    <edge name="Elisabethstraße H-AA" weight="118">
+        <next>AA</next>
+    </edge>
+
+    <edge name="Georgenstraße V-W" weight="44">
+        <next>W</next>
+    </edge>
+
+    <edge name="Georgenstraße W-V" weight="44">
+        <next>V</next>
+    </edge>
+
+    <edge name="Georgenstraße W-J" weight="126">
+        <next>J</next>
+    </edge>
+
+    <edge name="Georgenstraße J-W" weight="126">
+        <next>W</next>
+    </edge>
+
+    <edge name="Görresstraße U-T" weight="142">
+        <next>T</next>
+    </edge>
+
+    <edge name="Görresstraße T-U" weight="142">
+        <next>U</next>
+    </edge>
+
+    <edge name="Görresstraße T-K" weight="127">
+        <next>K</next>
+    </edge>
+
+    <edge name="Görresstraße K-T" weight="127">
+        <next>T</next>
+    </edge>
+
+    <edge name="Wormser Str. Z-AH" weight="119">
+        <next>AH</next>
+    </edge>
+
+    <edge name="Wormser Str. AH-Z" weight="119">
+        <next>Z</next>
+    </edge>
+
+    <edge name="Agnesstraße Y-I" weight="123">
+        <next>I</next>
+    </edge>
+
+    <edge name="Agnesstraße I-Y" weight="123">
+        <next>Y</next>
+    </edge>
+
+    <edge name="Barbarastraße D-AE" weight="237">
+        <next>AE</next>
+    </edge>
+
+    <edge name="Barbarastraße AE-D" weight="237">
+        <next>D</next>
+    </edge>
+
+    <edge name="Kathi-Kobus-Straße AD-AC" weight="236">
+        <next>AC</next>
+    </edge>
+
+    <edge name="Kathi-Kobus-Straße AC-AD" weight="236">
+        <next>AD</next>
+    </edge>
+
+    <edge name="Kathi-Kobus-Straße AC-AB" weight="316">
+        <next>AB</next>
+    </edge>
+
+    <edge name="Kathi-Kobus-Straße AB-AC" weight="316">
+        <next>AC</next>
+    </edge>
+
+    <edge name="Cranachstraße AF-AG" weight="114">
+        <next>AG</next>
+    </edge>
+
+</map>
