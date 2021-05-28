@@ -5,11 +5,11 @@ class Node:
     _id = 0
 
     def __init__(self, name):
-        self._name = name
+        self.__name = name
         self.next = []
 
     def __str__(self):
-        output = f"{self._name}"
+        output = f"{self.__name}"
         if len(self.next) != 0:
             for idx, node in enumerate(self.next):
                 if idx != 0:
@@ -23,7 +23,7 @@ class Node:
 
     @property
     def name(self):
-        return self._name
+        return self.__name
 
 
 if __name__ == '__main__':

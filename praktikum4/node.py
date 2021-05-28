@@ -7,6 +7,8 @@ class Node:
     def __init__(self, name=None):
         self.__id = self.incr()
         self.__next = []
+        self.distance = float('inf')
+        self.predecessor = None
 
         if name is None:
             self._name = f'Knoten {self.__id}'
@@ -24,6 +26,18 @@ class Node:
         else:
             output += " <end>"
         return output
+
+    def __gt__(self, other):
+        return self.distance > other.distance
+
+    def __lt__(self, other):
+        return self.distance < other.distance
+
+    def __le__(self, other):
+        return self.distance <= other.distance
+
+    def __ge__(self, other):
+        return self.distance >= other.distance
 
     @classmethod
     def incr(cls):

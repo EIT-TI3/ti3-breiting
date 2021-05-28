@@ -3,7 +3,7 @@
 
 
 class Node:
-    _id = 0
+    __id = 0
 
     def __init__(self, name=None):
         self.id = self.incr()
@@ -29,8 +29,8 @@ class Node:
 
     @classmethod
     def incr(cls):
-        cls._id += 1
-        return cls._id
+        cls.__id += 1
+        return cls.__id
 
     @property
     def name(self):
