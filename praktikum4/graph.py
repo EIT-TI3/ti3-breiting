@@ -58,7 +58,7 @@ class Graph:
                 n2 = self.find_node(n2)
             try:
                 output += self.find_edge_between(n1, n2)
-            except:
+            except TypeError:
                 output = -1
                 break
             n1 = n2
@@ -74,66 +74,49 @@ class Graph:
                     return edge.weight if weight else edge
 
     def _initialize_dijkstra(self, start_node):
-        start_node.distance = 0
 
         for node in self.nodes.values():
             node.distance = float('inf')
             node.predecessor = None
 
-            if start_node in node.neighbours():
-                node.distance = self.find_edge_between(start_node, node)
-
-            self.queue.append((node.distance, node))
+        self.queue = [*self.nodes.values()]
+        start_node.distance = 0
 
     def dijkstra(self, start_node, end_node):
         start_node, end_node = self.find_node(start_node), self.find_node(end_node)
+
         self._initialize_dijkstra(start_node)
 
         while len(self.queue) > 0:
-            node = self.shortest_node()[1]
+            self.queue.sort()
+            node = self.queue.pop(0)
 
             for neighbour in node.neighbours():
-                if neighbour in (element[1] for element in self.queue):
-                    self.update_distance(node, neighbour)
+                self.update_distance(node, neighbour)
 
             if end_node.predecessor is not None:
-                print(*self.create_shortest_path(end_node, start_node))
-                print(end_node.distance)
+                self.create_shortest_path(end_node)
                 break
 
-    def shortest_node(self):
-        length, node_idx = float('inf'), None
-
-        for idx, element in enumerate(self.queue):
-            if element[0] < length:
-                length = element[0]
-                node_idx = idx
-
-        return self.queue.pop(node_idx)
-
     def update_distance(self, node, neighbour):
-        new_distance = self.path_length([node, neighbour]) + node.distance
+        new_distance = self.find_edge_between(node, neighbour) + node.distance
 
         if new_distance < neighbour.distance:
             neighbour.distance = new_distance
             neighbour.predecessor = node
-            self.update_queue(neighbour)
 
-    def update_queue(self, node):
-        for idx, element in enumerate(self.queue):
-            if element[1] == node:
-                self.queue[idx] = (node.distance, node)
-
-    def create_shortest_path(self, end_node, start_node):
+    def create_shortest_path(self, end_node):
         predecessor = end_node
-        path = []
+        path = 0
+        way = [f'{end_node.name}\n']
 
         while predecessor is not None:
             if predecessor.predecessor is not None:
-                path.append(f'\n{self.find_edge_between(predecessor, predecessor.predecessor, weight=False).name} '
-                            f'--> {predecessor.name}')
+                edge = self.find_edge_between(predecessor, predecessor.predecessor, weight=False)
+                way.append(f'{predecessor.predecessor.name} --> {edge.name}\n')
+                path += edge.weight
+
             predecessor = predecessor.predecessor
 
-        path.append(start_node.name)
-
-        return path[::-1]
+        print(*reversed(way))
+        print(f'Länge des Weges: {path}')
