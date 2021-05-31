@@ -1,5 +1,5 @@
+from algorhythms.heap import NodeHeap
 
-from algorhythms.listSorting import NodeHeap
 from node import Node
 from edge import Edge
 
@@ -121,5 +121,3 @@ class Graph:
 
         print(*reversed(way))
         print(f'Länge des Weges: {path}')
-
-
