@@ -129,3 +129,6 @@ dmypy.json
 .pyre/
 
 .idea/
+praktikum4/cache/
+*.xml
+praktikum4/bremen-latest.osm
