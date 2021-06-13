@@ -1,4 +1,4 @@
-from algorhythms.heap import NodeHeap
+from algorithms.heap import NodeHeap
 
 from node import Node
 from edge import Edge

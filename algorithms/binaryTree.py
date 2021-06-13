@@ -1,3 +1,6 @@
+import random
+
+
 class BinaryTreeNode(object):
     root = None
 
@@ -44,10 +47,15 @@ class BinaryTreeNode(object):
         else:
             return node.insert(value, node.right)
 
-    def search_recursively(self, value, node):
-        if value is None or value is self.value:
+    @staticmethod
+    def search_recursively(value, node=root):
+        if value is None or value is node.value:
             return node
-        if value <= self.left:
-            return self.search_recursively(value, self.left)
-        if value > self.right:
-            return self.search_recursively(value, self.right)
+        if value <= node.left:
+            return node.search_recursively(value, node.left)
+        if value > node.right:
+            return node.search_recursively(value, node.right)
+
+
+root = BinaryTreeNode.create_tree([random.randint(0, 10 * 3) for _ in range(10 * 3)])
+print(root.search_recursively(5))

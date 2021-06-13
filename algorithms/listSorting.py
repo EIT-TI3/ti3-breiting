@@ -38,5 +38,5 @@ def partition(iterable, lower, higher):
     return i
 
 
-test_list = [random.randint(0, 10**3) for _ in range(10**3)]
+test_list = [random.randint(0, 10) for _ in range(10)]
 quicksort(test_list, 0, len(test_list)-1)
