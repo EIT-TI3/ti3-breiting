@@ -120,4 +120,4 @@ class Graph:
             predecessor = predecessor.predecessor
 
         print(*reversed(way))
-        print(f'Länge des Weges: {path}')
+        print(f'Länge des Weges: {round(path, 3)}')

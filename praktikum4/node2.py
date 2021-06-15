@@ -2,7 +2,7 @@
 
 
 class Node:
-    _id = 0
+    __id = 0
 
     def __init__(self, name):
         self.__name = name

@@ -5,48 +5,31 @@ class Node:
     __id = 0
 
     def __init__(self, name=None):
-        self.__id = self.incr()
+        Node.__id += 1
         self.__next = []
         self.distance = float('inf')
         self.predecessor = None
 
         if name is None:
-            self._name = f'Knoten {self.__id}'
+            self.__name = f'Knoten {self.__id}'
         else:
-            self._name = name
+            self.__name = name
 
     def __str__(self):
-        output = f"{self._name}"
+        output = f"{self.__name}"
         if len(self.__next) > 0:
             for idx, edge in enumerate(self.__next):
                 if idx != 0:
-                    output += " " * len(self._name)
+                    output += " " * len(self.__name)
                 output += f" --{edge}--> {edge.get_connect().name}\n"
             output = output[:-1]
         else:
             output += " <end>"
         return output
 
-    def __gt__(self, other):
-        return self.distance > other.distance
-
-    def __lt__(self, other):
-        return self.distance < other.distance
-
-    def __le__(self, other):
-        return self.distance <= other.distance
-
-    def __ge__(self, other):
-        return self.distance >= other.distance
-
-    @classmethod
-    def incr(cls):
-        cls.__id += 1
-        return cls.__id
-
     @property
     def name(self):
-        return self._name
+        return self.__name
 
     def connect(self, n):
         self.__next.append(n)

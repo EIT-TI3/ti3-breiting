@@ -6,20 +6,20 @@ class Node:
     __id = 0
 
     def __init__(self, name=None):
-        self.id = self.incr()
-        self._next = []
+        Node.__id += 1
+        self.__next = []
 
         if name is None:
-            self._name = f'Knoten {self.id}'
+            self.__name = f'Knoten {self.__id}'
         else:
-            self._name = name
+            self.__name = name
 
     def __str__(self):
-        output = f"{self._name}"
-        if len(self._next) != 0:
-            for idx, node in enumerate(self._next):
+        output = f"{self.__name}"
+        if len(self.__next) != 0:
+            for idx, node in enumerate(self.__next):
                 if idx != 0:
-                    output += " " * len(self._name)
+                    output += " " * len(self.__name)
                 output += f" ---> {node.name}\n"
             output = output[:-1]
         else:
@@ -27,20 +27,15 @@ class Node:
 
         return output
 
-    @classmethod
-    def incr(cls):
-        cls.__id += 1
-        return cls.__id
-
     @property
     def name(self):
-        return self._name
+        return self.__name
 
     def connect(self, n):
-        self._next.append(n)
+        self.__next.append(n)
 
     def get_connects(self):
-        return tuple(self._next)
+        return tuple(self.__next)
 
 
 if __name__ == '__main__':

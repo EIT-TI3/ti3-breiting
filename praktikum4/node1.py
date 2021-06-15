@@ -2,21 +2,21 @@
 
 
 class Node:
-    _id = 0
+    __id = 0
 
     def __init__(self, name):
         self.name = name
         self.next = []
 
     def __str__(self):
-        output = f"{self.name}"
+        output = self.name
         if len(self.next) != 0:
             for idx, node in enumerate(self.next):
                 if idx != 0:
                     output += " "
                 output += f" ---> {node.name}\n"
             output = output[:-1]
-        elif len(self.next) == 0:
+        else:
             output += " <end>"
 
         return output
