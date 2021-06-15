@@ -1,3 +1,5 @@
+from typing import Union
+
 from algorithms.heap import NodeHeap
 
 from node import Node
@@ -35,27 +37,19 @@ class Graph:
         return edge
 
     def find_node(self, name) -> Node:
-        try:
-            output = self.nodes[name]
-        except KeyError:
-            output = None
-        return output
+        return self.nodes[name] if name in self.nodes.keys() else None
 
     def find_edge(self, name) -> Edge:
-        try:
-            output = self.edges[name]
-        except KeyError:
-            output = None
-        return output
+        return self.edges[name] if name in self.edges.keys() else None
 
-    def path_length(self, path_node_names):
+    def path_length(self, path_node_names) -> Union[float, int]:
         output = 0
-        n1 = path_node_names.pop(0)
 
+        n1 = path_node_names[0]
         if isinstance(n1, str):
             n1 = self.find_node(n1)
 
-        for n2 in path_node_names:
+        for n2 in path_node_names[1:]:
             if isinstance(n2, str):
                 n2 = self.find_node(n2)
             try:
@@ -72,23 +66,24 @@ class Graph:
         for edge in n1.get_connects():
             if edge.get_connect() is n2:
                 return edge.weight if weight else edge
+        return None
 
     def dijkstra(self, start_node, end_node):
         start_node, end_node = self.find_node(start_node), self.find_node(end_node)
 
-        self._initialize_dijkstra(start_node)
+        self.__initialize_dijkstra(start_node)
 
         while len(self.heap) > 0:
             node = self.heap.pop_task()
 
             for neighbour in node.neighbours():
-                self._update_distance(node, neighbour)
+                self.__update_distance(node, neighbour)
 
             if end_node.predecessor is not None:
-                self._create_shortest_path(end_node)
+                self.__create_shortest_path(end_node)
                 break
 
-    def _initialize_dijkstra(self, start_node):
+    def __initialize_dijkstra(self, start_node):
         for node in self.nodes.values():
             node.distance = float('inf')
             node.predecessor = None
@@ -98,7 +93,7 @@ class Graph:
 
             self.heap.add_task(node, priority=node.distance)
 
-    def _update_distance(self, node, neighbour):
+    def __update_distance(self, node, neighbour):
         new_distance = self.find_edge_between(node, neighbour) + node.distance
 
         if new_distance < neighbour.distance:
@@ -107,7 +102,7 @@ class Graph:
             self.heap.remove_task(neighbour)
             self.heap.add_task(neighbour, priority=neighbour.distance)
 
-    def _create_shortest_path(self, end_node):
+    def __create_shortest_path(self, end_node):
         predecessor = end_node
         path = 0
         way = [f'{end_node.name}\n']
