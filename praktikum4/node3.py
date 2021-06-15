@@ -10,7 +10,7 @@ class Node:
         self.__next = []
 
         if name is None:
-            self.__name = f'Knoten {self.__id}'
+            self.__name = f'Knoten {Node.__id}'
         else:
             self.__name = name
 
