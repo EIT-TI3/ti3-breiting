@@ -16,7 +16,7 @@ class Node:
                     output += " "
                 output += f" ---> {node.name}\n"
             output = output[:-1]
-        elif len(self.next) == 0:
+        else:
             output += " <end>"
 
         return output
