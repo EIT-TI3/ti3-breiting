@@ -7,16 +7,14 @@ class Node:
     def __init__(self, name=None):
         Node.__id += 1
         self.__next = []
-        self.distance = float('inf')
-        self.predecessor = None
 
         if name is None:
-            self.__name = f'Knoten {self.__id}'
+            self.__name = f'Knoten {Node.__id}'
         else:
             self.__name = name
 
     def __str__(self):
-        output = f"{self.__name}"
+        output = self.__name
         if len(self.__next) > 0:
             for idx, edge in enumerate(self.__next):
                 if idx != 0:
